@@ -26,7 +26,8 @@
   "private": true,
   "scripts": {
     "build": "TARGET=build webpack",
-    "start": "TARGET=dev webpack-dev-server --devtool eval-source --progress --colors --hot --inline --history-api-fallback"
+    "start": "TARGET=dev webpack-dev-server --devtool eval-source --progress --colors --hot --inline --history-api-fallback",
+    "deploy":"npm run build; git add build && git commit -m 'deploy with npm'; git subtree push --prefix build origin gh-pages"
   },
   "repository": {
     "type": "git",

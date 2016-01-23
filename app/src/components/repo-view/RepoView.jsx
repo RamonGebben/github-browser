@@ -1,6 +1,8 @@
 import React from 'react';
 import FileView from './FileView';
 import TreeView from './TreeView';
+import RepoMeta from './RepoMeta';
+import Loading from './Loading';
 
 const API_URL = 'https://api.github.com/repos/';
 
@@ -14,7 +16,8 @@ class RepoView extends React.Component {
           treeData: null,
           editorContent: null,
           activeFile: null,
-          repo: `${params.username}/${params.repo}`
+          repo: `${params.username}/${params.repo}`,
+          loading: false
       }
     }
 
@@ -33,11 +36,12 @@ class RepoView extends React.Component {
     }
 
     _getByPath(p){
+        this.setState({loading: true});
         fetch(`${API_URL}${this.state.repo}/contents/${p}`)
             .then(res => res.json())
             .then(data => {
                 let text = atob(data.content);
-                this.setState({editorContent: text, activeFile: data.name});
+                this.setState({editorContent: text, activeFile: data.name, loading: false});
             });
     }
 
@@ -52,12 +56,20 @@ class RepoView extends React.Component {
     }
 
     render() {
-        let editorView = this.state.editorContent ? <FileView file={this.state.activeFile} content={this.state.editorContent} /> : null;
-        let treeView = this.state.treeData ? <TreeView name={this.state.repo} onSelect={this.onFileChange.bind(this)} tree={this.state.treeData.tree}/> : null;
+        let editorView = this.state.editorContent && !this.state.loading ?
+            <FileView file={this.state.activeFile} content={this.state.editorContent} /> :
+            editorView = <Loading />;
+
+        let treeView = this.state.treeData ?
+            <TreeView name={this.state.repo} onSelect={this.onFileChange.bind(this)} tree={this.state.treeData.tree}/> : null;
         return (
             <div className="repo-view">
                 {treeView}
-                {editorView}
+                <div className='right-hand'>
+                    <RepoMeta repo={this.state.repo} />
+                    {editorView}
+                </div>
+
             </div>
         );
     }

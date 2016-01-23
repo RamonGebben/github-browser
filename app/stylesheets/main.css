@@ -5,10 +5,10 @@
 html, body {
     margin: 0;
     padding: 0;
+    background-color: #FBF1D2;
 }
 
 body {
-  background: #f0f0f0;
   color: #333;
 }
 
@@ -27,14 +27,39 @@ body {
     display: flex;
 }
 
+.right-hand,
 .file-view {
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .file-view,
 .tree-view,
 .tree-view ul {
-    background-color: #FBF1D2 !important;
+    background-color: #FBF1D2;
 }
 
 .tree-view {flex-grow: 0.1;}
+
+.repo-meta {
+    height: 60px;
+    padding: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    flex-grow: 0;
+}
+
+.shield {
+    align-self: flex-end;
+    width: 90px; height: 20px;
+}
+
+.loading-screen {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-grow: 1;
+}

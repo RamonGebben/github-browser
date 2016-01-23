@@ -21,6 +21,10 @@ class FileView extends React.Component {
       this.mountEditor();
   }
 
+  componentWillUnmount(){
+      this.editor = null;
+  }
+
   mountEditor(){
       let fileExt = this.props.file.split('.')[this.props.file.split('.').length -1];
       let editorMode = modeMap[fileExt];
@@ -41,7 +45,7 @@ class FileView extends React.Component {
   render() {
     return (
         <div className='file-view'>
-            <div id='ace-editor' style={{height: `${window.innerHeight}px`}}/>
+            <div id='ace-editor' style={{height: `${window.innerHeight - 60 }px`}}/>
         </div>
     );
   }
