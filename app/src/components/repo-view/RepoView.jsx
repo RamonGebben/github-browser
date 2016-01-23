@@ -56,9 +56,13 @@ class RepoView extends React.Component {
     }
 
     render() {
-        let editorView = this.state.editorContent && !this.state.loading ?
-            <FileView file={this.state.activeFile} content={this.state.editorContent} /> :
+        let editorView;
+
+        if(this.state.editorContent && !this.state.loading ){
+            editorView = <FileView file={this.state.activeFile} content={this.state.editorContent} />;
+        }else if( this.state.loading ){
             editorView = <Loading />;
+        }
 
         let treeView = this.state.treeData ?
             <TreeView name={this.state.repo} onSelect={this.onFileChange.bind(this)} tree={this.state.treeData.tree}/> : null;

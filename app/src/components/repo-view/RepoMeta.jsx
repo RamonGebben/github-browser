@@ -10,7 +10,9 @@ class FileView extends React.Component {
   render() {
     return (
         <div className='repo-meta'>
-            <img className='shield' src={`https://img.shields.io/travis/${this.props.repo}.svg`}/>
+            <h2>
+                <a href={`https://github.com/${this.props.repo}`}>{this.props.repo}</a>
+            </h2>
         </div>
     );
   }

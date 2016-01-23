@@ -6,6 +6,7 @@
   "dependencies": {
     "brace": "^0.7.0",
     "history": "^1.17.0",
+    "marked": "^0.3.5",
     "react": "^0.14.6",
     "react-dom": "^0.14.6",
     "react-router": "^1.0.3",
@@ -27,7 +28,7 @@
   "scripts": {
     "build": "TARGET=build webpack",
     "start": "TARGET=dev webpack-dev-server --devtool eval-source --progress --colors --hot --inline --history-api-fallback",
-    "deploy":"npm run build; git add build && git commit -m 'deploy with npm'; git subtree push --prefix build origin gh-pages"
+    "deploy": "npm run build; git add build && git commit -m 'deploy with npm'; git subtree push --prefix build origin gh-pages"
   },
   "repository": {
     "type": "git",

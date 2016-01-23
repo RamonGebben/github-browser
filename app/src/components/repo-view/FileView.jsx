@@ -1,5 +1,6 @@
 import React from 'react';
 import ace from 'brace';
+import marked from 'marked';
 
 import { modeMap } from '../../util/editor-helper';
 
@@ -11,9 +12,15 @@ class FileView extends React.Component {
   constructor(props){
     super(props);
     this.props = props;
+    this.state = {
+        fileExt: 'md'
+    }
   }
 
   componentDidMount(){
+      this.setState({
+          fileExt: this.props.file.split('.')[this.props.file.split('.').length -1]
+      });
       this.mountEditor();
   }
 
@@ -26,10 +33,10 @@ class FileView extends React.Component {
   }
 
   mountEditor(){
-      let fileExt = this.props.file.split('.')[this.props.file.split('.').length -1];
-      let editorMode = modeMap[fileExt];
+      if( this.state.fileExt === 'md' ) return;
 
-      console.log([editorMode, fileExt]);
+      let editorMode = modeMap[this.state.fileExt];
+      console.log([editorMode, this.state.fileExt]);
 
       if( !this.editor ){
           this.editor = ace.edit('ace-editor');
@@ -43,11 +50,15 @@ class FileView extends React.Component {
   }
 
   render() {
-    return (
-        <div className='file-view'>
-            <div id='ace-editor' style={{height: `${window.innerHeight - 60 }px`}}/>
-        </div>
-    );
+      if( this.state.fileExt === 'md' ){
+          return (<div className='file-view'>
+              <div id='markdown-view' dangerouslySetInnerHTML={{ __html: marked(this.props.content) }}/>
+          </div>);
+      }else {
+          return(<div className='file-view'>
+                    <div id='ace-editor' style={{height: `${window.innerHeight - 60 }px`}}/>
+                 </div>);
+      }
   }
 }
 

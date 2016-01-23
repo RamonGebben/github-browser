@@ -17,14 +17,16 @@ class App extends React.Component {
 
     render() {
         return (
-            <div>
-                <h1>App</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <div className='standard-container'>
+                <h1>Github Browser</h1>
+                <p>Browse Github projects like you would do in your editor</p>
                 <h3>Repo you want to view.</h3>
                 <small>* use this format `username/repo`</small>
                 <br/>
-                <input type='text' onKeyUp={this.onInputChange.bind(this)}/>
-                <Link to={`/${this.state.search}`}>Open</Link>
+                <div className='input-container'>
+                    <input type='text' onKeyUp={this.onInputChange.bind(this)}/>
+                    <Link to={`/${this.state.search}`}>Open</Link>
+                </div>
             </div>
     );
   }
